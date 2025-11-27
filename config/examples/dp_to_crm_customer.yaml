@@ -1,0 +1,65 @@
+job_id: dp_to_group_crm_customers
+description: "Load consolidated customer file from Data Platform into Group CRM Postgres"
+owner: "team-group-crm"
+
+schedule: "0 2 * * *"
+
+source:
+  type: csv
+  path: "/data/landing/group_crm/customers_*.csv"
+  header: true
+  delimiter: ","
+  charset: "UTF-8"
+  null_value: ""
+
+schema:
+  - name: legal_entity
+    type: string
+    length: 10
+    nullable: false
+  - name: local_cif
+    type: string
+    length: 30
+    nullable: false
+  - name: id
+    type: string
+    length: 10
+    nullable: false
+  - name: id_type
+    type: string
+    length: 15
+    nullable: false
+  - name: id_issuing_country
+    type: string
+    length: 30
+    nullable: false
+  - name: name
+    type: string
+    length: 50
+    nullable: false
+  - name: email
+    type: string
+    length: 50
+    nullable: true
+  - name: phone
+    type: int
+    nullable: true
+  - name: address
+    type: string
+    length: 200
+    nullable: true
+
+target:
+  type: postgres
+  connection: "pg_group_crm"
+  schema: "public"
+  table: "customers"
+  load_mode: truncate_insert
+
+options:
+  on_error: "dead_letter"
+  batch_size: 5000
+  parallelism: 4
+  deduplicate: false
+
+

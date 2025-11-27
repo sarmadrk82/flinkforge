@@ -1,0 +1,44 @@
+name: crm_postgres
+connector: jdbc
+connection:
+  url: jdbc:postgresql://localhost:5432/crm_db
+  table_name: customers
+  username: postgres
+  password: mysecretpassword
+schema:
+  - name: legal_entity
+    type: string
+    length: 10
+    nullable: false
+  - name: local_cif
+    type: string
+    length: 30
+    nullable: false
+  - name: id
+    type: string
+    length: 10
+    nullable: false
+  - name: id_type
+    type: string
+    length: 15
+    nullable: false
+  - name: id_issuing_country
+    type: string
+    length: 30
+    nullable: false
+  - name: name
+    type: string
+    length: 50
+    nullable: false
+  - name: email
+    type: string
+    length: 50
+    nullable: true
+  - name: phone
+    type: int
+    nullable: true
+  - name: address
+    type: string
+    length: 200
+    nullable: true
+
