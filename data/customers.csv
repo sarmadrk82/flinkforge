@@ -1,0 +1,6 @@
+legal_entity,local_cif,id,id_type,id_issuing_country,name,email,phone,address
+US,CIF00123,CUST001,PASSPORT,USA,John Doe,john.doe@company.com,15551234567,"123 Main St, New York, NY"
+EU,CIF00987,CUST987,NATIONAL_ID,DEU,Anna Müller,anna@gmx.de,491234567890,"Berliner Str. 45, 10115 Berlin"
+APAC,CIF05551,CUST551,DRIVING_LICENSE,SGP,Rajesh Kumar,rajesh@singtel.sg,6598765432,"Orchard Road, Singapore 238841"
+US,CIF00234,CUST234,PASSPORT,USA,Sarah Johnson,sarah.j@outlook.com,13105551234,"456 Oak Ave, San Francisco, CA"
+

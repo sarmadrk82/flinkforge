@@ -1,27 +1,34 @@
-# pipelines/customers_csv_to_crm.yaml
+# config/pipelines/customers_csv_to_crm.yaml
+
 name: customers_csv_to_crm
 description: Load cleaned customers from CSV into CRM
 sources:
   - customers_csv
 targets:
   - crm_postgres
-pipeline_sql: |
-  INSERT INTO `crm_postgres`
-  SELECT
-    legal_entity,
-    local_cif,
-    id,
-    UPPER(name) AS name,
-    TRIM(LOWER(email)) AS email,
-    phone,
-    address,
-    CASE 
-      WHEN id_issuing_country = 'USA' THEN 'US'
-      WHEN id_issuing_country = 'GBR' THEN 'UK'
-      ELSE id_issuing_country 
-    END AS normalized_country
-  FROM `customers_csv`
-  WHERE name IS NOT NULL
-    AND email IS NOT NULL
-    AND email LIKE '%@%.%';
+
+pipeline_sql:
+  - |
+    INSERT INTO `crm_postgres`
+    SELECT
+      CAST(legal_entity AS VARCHAR(10))                     AS legal_entity,
+      CAST(local_cif AS VARCHAR(30))                         AS local_cif,
+      CAST(id AS VARCHAR(20))                                AS id,
+      CAST(id_type AS VARCHAR(15))                           AS id_type,
+      CAST(
+        CASE 
+          WHEN id_issuing_country = 'USA' THEN 'US'
+          WHEN id_issuing_country = 'GBR' THEN 'UK'
+          ELSE id_issuing_country 
+        END AS VARCHAR(3)
+      )                                                      AS id_issuing_country,
+      CAST(UPPER(name) AS VARCHAR(100))                      AS name,
+      CAST(TRIM(LOWER(email)) AS VARCHAR(100))               AS email,
+      CAST(phone AS BIGINT)                                  AS phone,
+      CAST(address AS VARCHAR(200))                          AS address
+    FROM `customers_csv`
+    WHERE name IS NOT NULL
+      AND email IS NOT NULL
+      AND email LIKE '%@%.%';
+
 

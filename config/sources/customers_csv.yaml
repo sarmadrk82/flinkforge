@@ -1,45 +1,29 @@
+# config/sources/customers_csv.yaml
 name: customers_csv
 connector: filesystem
-path: /data/customers.csv          # or https://... or s3://...
+path: file:///workspace/data/customers.csv
 format: csv
 format_options:
-  csv.ignore-parse-errors: "true"
   csv.field-delimiter: ","
+  csv.ignore-parse-errors: "true"
+
 schema:
   - name: legal_entity
     type: string
-    length: 10
-    nullable: false
   - name: local_cif
     type: string
-    length: 30
-    nullable: false
   - name: id
     type: string
-    length: 10
-    nullable: false
   - name: id_type
     type: string
-    length: 15
-    nullable: false
   - name: id_issuing_country
     type: string
-    length: 30
-    nullable: false
   - name: name
     type: string
-    length: 50
-    nullable: false
   - name: email
     type: string
-    length: 50
-    nullable: true
   - name: phone
-    type: int
-    nullable: true
+    type: string
   - name: address
     type: string
-    length: 200
-    nullable: true
-
 
