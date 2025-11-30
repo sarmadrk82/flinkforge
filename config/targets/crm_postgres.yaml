@@ -1,8 +1,31 @@
+# config/targets/crm_postgres.yaml
 name: crm_postgres
 connector: jdbc
 connection:
   url: jdbc:postgresql://host.docker.internal:5432/crm_db
   table_name: customers
   username: postgres
-  password: secret 
+  password: secret
+
+# THIS IS THE ONLY PLACE SCHEMA LIVES — pure config
+schema:
+  - name: legal_entity
+    type: VARCHAR(10)
+  - name: local_cif
+    type: VARCHAR(30)
+  - name: id
+    type: VARCHAR(20)
+  - name: id_type
+    type: VARCHAR(15)
+  - name: id_issuing_country
+    type: VARCHAR(3)
+  - name: name
+    type: VARCHAR(100)
+  - name: email
+    type: VARCHAR(100)
+  - name: phone
+    type: BIGINT
+  - name: address
+    type: VARCHAR(200)
+
 

@@ -32,5 +32,15 @@ RUN pip3 install apache-flink==1.18.0 --no-cache-dir --no-build-isolation
 # Your deps
 RUN pip3 install pyyaml requests ollama --no-cache-dir
 
+# === ADD THESE TWO LINES ONLY (keep everything else exactly as-is) ===
+
+# Add the official Flink JDBC connector (this is the missing factory)
+RUN wget -q https://repo1.maven.org/maven2/org/apache/flink/flink-connector-jdbc/3.1.2-1.18/flink-connector-jdbc-3.1.2-1.18.jar \
+    -O /opt/flink/lib/flink-connector-jdbc-3.1.2-1.18.jar
+
+# Add PostgreSQL driver
+RUN wget -q https://jdbc.postgresql.org/download/postgresql-42.7.4.jar \
+    -O /opt/flink/lib/postgresql-42.7.4.jar
+
 USER flink
 WORKDIR /opt/flink

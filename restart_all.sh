@@ -17,11 +17,32 @@ docker run -d \
   --network flink-net \
   -e POSTGRES_DB=crm_db \
   -e POSTGRES_PASSWORD=secret \
+  -v postgres-data:/var/lib/postgresql/data \
   -p 5432:5432 \
   postgres:15-alpine
 
 echo "Waiting 8 seconds for Postgres to be ready..."
 sleep 8
+
+
+# After "Starting Postgres..."
+echo "Creating crm_db and customers table..."
+docker exec -i postgres-flink psql -U postgres << 'SQL'
+CREATE DATABASE crm_db;
+\c crm_db
+CREATE TABLE customers (
+  legal_entity VARCHAR(10) NOT NULL,
+  local_cif VARCHAR(30) NOT NULL,
+  id VARCHAR(20) NOT NULL,
+  id_type VARCHAR(15) NOT NULL,
+  id_issuing_country VARCHAR(3) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(100),
+  phone BIGINT,
+  address VARCHAR(200)
+);
+SQL
+
 
 echo "Starting Flink JobManager..."
 docker run -d --name flink-jobmanager --network flink-net \
