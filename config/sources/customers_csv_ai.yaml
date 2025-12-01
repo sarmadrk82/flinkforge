@@ -1,0 +1,26 @@
+name: customers_csv_ai
+connector: filesystem
+path: file:///workspace/data/customers.csv
+format: csv
+format_options:
+  csv.ignore-parse-errors: 'true'
+  csv.field-delimiter: ','
+schema:
+- name: legal_entity
+  type: VARCHAR(50)
+- name: local_cif
+  type: VARCHAR(50)
+- name: id
+  type: VARCHAR(50)
+- name: id_type
+  type: VARCHAR(50)
+- name: id_issuing_country
+  type: VARCHAR(50)
+- name: name
+  type: VARCHAR(50)
+- name: email
+  type: VARCHAR(50)
+- name: phone
+  type: BIGINT
+- name: address
+  type: VARCHAR(50)
