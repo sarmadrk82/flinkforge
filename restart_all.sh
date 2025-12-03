@@ -9,7 +9,7 @@ docker rm   flink-jobmanager flink-taskmanager-1 flink-taskmanager-2 postgres-fl
 docker network rm flink-net 2>/dev/null || true
 
 echo "Creating network..."
-docker network create flink-net
+#docker network create flink-net
 
 echo "Starting Postgres (crm_db + user postgres, password secret)..."
 docker run -d \
@@ -47,7 +47,9 @@ SQL
 echo "Starting Flink JobManager..."
 docker run -d --name flink-jobmanager --network flink-net \
   -p 8081:8081 \
+  -p 8000:8000 \
   -v $(pwd):/workspace \
+  -v $(pwd)/src:/opt/flink/src \
   -e FLINK_PROPERTIES="jobmanager.rpc.address: flink-jobmanager" \
   myflink-pyflink jobmanager
 

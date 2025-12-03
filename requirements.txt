@@ -1,5 +1,8 @@
-pyflink==1.18.0
-pyyaml==6.0.2
-requests==2.32.3
-ollama==0.3.3          # ← Only AI calls
-
+apache-flink
+pyyaml
+requests
+ollama          # ← Only AI calls
+pydantic
+fastapi
+uvicorn
+python-multipart
