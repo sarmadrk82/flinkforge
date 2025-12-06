@@ -6,3 +6,5 @@ pydantic
 fastapi
 uvicorn
 python-multipart
+install jaydebeapi==1.2.3 
+JPype1==1.5.0

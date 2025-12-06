@@ -6,7 +6,7 @@ format: csv
 format_options:
   csv.field-delimiter: ","
   csv.ignore-parse-errors: "true"
-
+table_name: customers_csv
 schema:
   - name: legal_entity
     type: string

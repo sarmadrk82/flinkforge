@@ -3,7 +3,7 @@ name: crm_postgres
 connector: jdbc
 connection:
   url: jdbc:postgresql://host.docker.internal:5432/crm_db
-  table_name: customers
+  table-name: customers
   username: postgres
   password: secret
 
