@@ -48,6 +48,7 @@ echo "Starting Flink JobManager..."
 docker run -d --name flink-jobmanager --network flink-net \
   -p 8081:8081 \
   -p 8000:8000 \
+  -p 8501:8501 \
   -v $(pwd):/workspace \
   -v $(pwd)/src:/opt/flink/src \
   -e FLINK_PROPERTIES="jobmanager.rpc.address: flink-jobmanager" \
